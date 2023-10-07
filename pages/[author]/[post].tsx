@@ -43,9 +43,8 @@ function Post(props: {
   blogs: Blog[];
   blogs2: Blog[];
 }) {
-  const path = useRouter();
-  console.log(path.query);
-  const [displayArticle, setDisplayArticle] = useState([]);
+  // const path = useRouter();
+  // console.log(path.query);
   // merge blogs and blog2. use useState
   const blog: Blog[] = props.blogs.filter((article): boolean => {
     return (
@@ -59,8 +58,11 @@ function Post(props: {
       article.fields.blogTitle === props.data.post
     );
   });
-  blog.push(blog2[0]);
-  console.log(blog, blog2);
+  if (blog2[0] !== undefined) {
+    blog.push(blog2[0]);
+  }
+  let displayArticle = blog;
+  // console.log(blog);
   return (
     <>
       <Head>
