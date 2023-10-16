@@ -60,22 +60,46 @@ function MainNavs() {
         </a>
       </div>
       <div className="flex justify-between mt-6 w-52">
-        <a href="/" className="hover:bg-blue-100 p-2 rounded">
+        <a
+          href="https://twitter.com/thepracticaldev"
+          className="hover:bg-blue-100 p-2 rounded"
+          target="_blank"
+        >
           <TwitterLogo className="fill-[#474747] hover:fill-indigo-700" />
         </a>
-        <a href="/" className="hover:bg-blue-100 p-2 rounded">
+        <a
+          href="https://facebook.com/thepracticaldev"
+          className="hover:bg-blue-100 p-2 rounded"
+          target="_blank"
+        >
           <FacebookLogo className="fill-[#474747] hover:fill-indigo-700" />
         </a>
-        <a href="/" className="hover:bg-blue-100 p-2 rounded">
+        <a
+          href="https://github.com/forem"
+          className="hover:bg-blue-100 p-2 rounded"
+          target="_blank"
+        >
           <GitHubLogo className="fill-[#474747] hover:fill-indigo-700" />
         </a>
-        <a href="/" className="hover:bg-blue-100 p-2 rounded">
+        <a
+          href="https://instagram.com/thepracticaldev"
+          className="hover:bg-blue-100 p-2 rounded"
+          target="_blank"
+        >
           <InstagramLogo className="fill-[#474747] hover:fill-indigo-700" />
         </a>
-        <a href="/" className="hover:bg-blue-100 p-2 rounded">
+        <a
+          href="https://twitch.com/thepracticaldev"
+          className="hover:bg-blue-100 p-2 rounded"
+          target="_blank"
+        >
           <TwitchLogo className="fill-[#474747] hover:fill-indigo-700" />
         </a>
-        <a href="/" className="hover:bg-blue-100 p-2 rounded">
+        <a
+          href="https://fosstodon.org/@thepracticaldev"
+          className="hover:bg-blue-100 p-2 rounded"
+          target="_blank"
+        >
           <MastodonLogo className="fill-[#474747] hover:fill-indigo-700" />
         </a>
       </div>

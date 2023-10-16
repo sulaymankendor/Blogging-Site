@@ -1,7 +1,7 @@
 export type Blog = {
-  sys: { id: string };
+  sys: { readonly id: string };
   fields: {
-    blogImage: { fields: { file: { url: string; fileName: string } } };
+    Image: { fields: { file: { url: string; fileName: string } } };
     blogTitle: string;
     authorImage: { fields: { file: { url: string; fileName: string } } };
     authorName: string;

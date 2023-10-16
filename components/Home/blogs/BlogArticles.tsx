@@ -3,13 +3,21 @@ import Link from "next/link";
 import { Avatar } from "@mui/material";
 
 import { Blog } from "@/Types/types";
-import { dateTime } from "@/lib/utilities/dateTime";
+import { date } from "@/lib/utilities/date";
+import { useRouter } from "next/router";
+import Favourite from "@/components/svgs/favourite/Favourite";
+import { favouriteBlogs } from "@/lib/utilities/favouriteBlogs";
 
 function BlogArticles({ blogArcticles }) {
-  const blogs: Blog[] = blogArcticles;
+  const router = useRouter();
+  let data = blogArcticles;
+  if (router.query.latest === "") {
+    data = blogArcticles.slice(0, 3);
+  }
+
   return (
     <section>
-      {blogs.map((article: Blog) => {
+      {data.map((article: Blog) => {
         return (
           <div
             key={article.sys.id}
@@ -19,7 +27,7 @@ function BlogArticles({ blogArcticles }) {
               href={`/${article.fields.authorName}/${article.fields.blogTitle}`}
             >
               <Image
-                src={"https://" + article.fields.blogImage.fields.file.url}
+                src={"https://" + article.fields.Image.fields.file.url}
                 alt={article.fields.blogTitle}
                 width={10000}
                 height={0}
@@ -45,9 +53,9 @@ function BlogArticles({ blogArcticles }) {
                     {article.fields.authorName}
                   </p>
                   <p className="text-xs pl-2 text-gray-600">{`${
-                    dateTime(article.fields.dateTime)[0]
-                  } ${dateTime(article.fields.dateTime)[1]} ${
-                    dateTime(article.fields.dateTime)[2]
+                    date(article.fields.dateTime)[0]
+                  } ${date(article.fields.dateTime)[1]} ${
+                    date(article.fields.dateTime)[2]
                   }
                   `}</p>
                 </div>
@@ -61,9 +69,32 @@ function BlogArticles({ blogArcticles }) {
                 </Link>
               </div>
             </div>
-            <p className="text-end mt-3 pr-5 text-gray-600 text-[12px]">
-              4 mins read
-            </p>
+            <div className="flex justify-around">
+              <p className=" mt-3 pr-5 text-gray-600 text-[12px]">
+                4 mins read
+              </p>
+              <button
+                className="bg-yellow-400"
+                style={{ backgroundClip: "border-box" }}
+                onClick={() => {
+                  if (favouriteBlogs.length === 0) {
+                    favouriteBlogs.push(article);
+                  } else {
+                    for (
+                      let index = 0;
+                      index < favouriteBlogs.length;
+                      index++
+                    ) {
+                      if (article.sys.id !== favouriteBlogs[index].sys.id) {
+                        favouriteBlogs.push(article);
+                      }
+                    }
+                  }
+                }}
+              >
+                <Favourite />
+              </button>
+            </div>
           </div>
         );
       })}
