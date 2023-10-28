@@ -1,5 +1,5 @@
-// build-search.js
 const contentful = require("contentful");
+const richText = require("@contentful/rich-text-react-renderer");
 require("dotenv").config();
 const algoliasearch = require("algoliasearch/lite");
 // const client = require("../../Contentful/fetch_blogs");
@@ -21,6 +21,7 @@ function transformPostsToSearchObjects(posts) {
       date: post.fields.dateTime,
       authorName: post.fields.authorName,
       authorImage: post.fields.authorImage.fields.file.url,
+      content: richText.documentToReactComponents(post.fields.content),
     };
   });
 

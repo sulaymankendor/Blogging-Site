@@ -1,5 +1,3 @@
-import React from "react";
-
 function AlgoliaSearch() {
   return (
     <div className=" flex items-center self-end mr-6 justify-between w-[175px] mb-2 py-3 pr-5">

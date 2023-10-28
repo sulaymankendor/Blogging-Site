@@ -1,11 +1,13 @@
-import { client } from "@/Contentful/fetch_blogs";
-import { Blog } from "@/Types/types";
-import { favouriteBlogs } from "@/lib/utilities/favouriteBlogs";
-import Link from "next/link";
-import Image from "next/image";
+import { useContext, useState } from "react";
 import Avatar from "@mui/material/Avatar";
-import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import Image from "next/image";
+import Link from "next/link";
+import { Oval } from "react-loader-spinner";
+
+import { client } from "@/Contentful/fetch_blogs";
 import BlogArticles2 from "@/components/Home/blogs/BlogArticles2";
+import { BlogContext } from "@/lib/utilities/context";
+import { date } from "@/lib/utilities/date";
 
 export async function getStaticProps() {
   const blogs2 = await client.getEntries({ content_type: "blog2" });
@@ -15,59 +17,85 @@ export async function getStaticProps() {
 }
 
 function Favourites(props) {
-  const blog: Blog[] = favouriteBlogs;
+  const blogContext = useContext(BlogContext);
+  const [loading, setLoading] = useState(false);
 
   return (
-    <div className="flex justify-around items-start">
-      {favouriteBlogs.length === 0 ? (
-        <p className="text-center mt-16">
-          No Favourite Blog added,{" "}
-          <Link
-            href="/"
-            className="text-blue-500 underline hover:text-blue-800"
-          >
-            Click Here
-          </Link>{" "}
-          to add blogs to favourites.
-        </p>
-      ) : (
-        <section className="">
-          <div>
-            {blog.map((article) => {
-              return (
-                <div
-                  key={article.sys.id}
-                  className="bg-white w-[60vw] mt-2 rounded-md border border-gray-200 border-solid mb-3 "
-                >
-                  <Image
-                    src={"https://" + article.fields.Image.fields.file.url}
-                    alt={article.fields.Image.fields.file.fileName}
-                    width={1000}
-                    height={0}
-                    className="w-full h-96 object-cover rounded-t"
-                  />
-                  <div className="flex ml-14 mt-7">
-                    <Avatar
-                      alt={article.fields.authorImage.fields.file.fileName}
-                      src={article.fields.authorImage.fields.file.url}
-                      style={{ zIndex: "0" }}
-                    />
-                    <p className=" ml-2">{article.fields.authorName}</p>
-                  </div>
-                  <p className="text-5xl font-extrabold w-[630px] ml-14 mt-10">
-                    {article.fields.blogTitle}
-                  </p>
-                  <p className="ml-14 mt-8 font-sans font-light w-4/5 leading-[35px] text-xl mb-3">
-                    {documentToReactComponents(article.fields.content)}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+    <>
+      {loading && (
+        <div className="fixed top-[45vh] left-[47vw] z-50">
+          <Oval secondaryColor="azure" />
+        </div>
       )}
-      <BlogArticles2 secondArticles={props.blogs2} width="w-96" />
-    </div>
+      <div className="flex justify-around items-start max-md:flex-col-reverse">
+        {blogContext[2].length === 0 ? (
+          <p className="max-w-[100%] mx-auto mt-16">
+            No Favourite Blog added, Click{" "}
+            <span className="font-bold">Home</span> to add blogs to favourites.
+          </p>
+        ) : (
+          <section className=" max-md:w-[100%]">
+            <div className="flex flex-wrap w-[73vw] max-md:w-[100vw]">
+              {blogContext[2].map((article) => {
+                return (
+                  <div
+                    key={article.sys.id}
+                    className="max-lg:w-[80vw] max-md:mx-[6px] max-md:w-[48vw] max-sm:w-[100vw] ml-1 mr-[4px] bg-white w-[35vw] mt-2 rounded-md border border-gray-200 border-solid mb-[-5px]"
+                  >
+                    <Link
+                      href={`/${article.fields.authorName}/${article.fields.blogTitle}`}
+                      onClick={() => {
+                        setLoading(true);
+                      }}
+                    >
+                      <Image
+                        src={"https://" + article.fields.Image.fields.file.url}
+                        alt={article.fields.Image.fields.file.fileName}
+                        width={1000}
+                        height={0}
+                        className="h-[200px] object-cover rounded-t "
+                      />
+                    </Link>
+                    <div className="flex items-center justify-between mt-[-20px] ">
+                      <div className="flex ml-4 mt-7 items-center">
+                        <Avatar
+                          alt={article.fields.authorImage.fields.file.fileName}
+                          src={article.fields.authorImage.fields.file.url}
+                          style={{ zIndex: "0" }}
+                        />
+                        <p className="text-sm ml-2">
+                          {article.fields.authorName}
+                        </p>
+                      </div>
+                      <p className="text-xs text-gray-600 mr-[20px] mt-7">{`${
+                        date(article.fields.dateTime)[0]
+                      } ${date(article.fields.dateTime)[1]} ${
+                        date(article.fields.dateTime)[2]
+                      }
+                    `}</p>
+                    </div>
+                    <Link
+                      href={`/${article.fields.authorName}/${article.fields.blogTitle}`}
+                      onClick={() => {
+                        setLoading(true);
+                      }}
+                    >
+                      <p className="hover:text-blue-800 mb-[15px] text-[19px] font-extrabold w-[90%] ml-4 text-start mt-5 text-gray-800">
+                        {article.fields.blogTitle}
+                      </p>
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
+        <BlogArticles2 secondArticles={props.blogs2} width="w-[300px]" />
+      </div>
+      {loading && (
+        <div className="bg-black fixed top-[56px] right-[-35vw] left-[-21vw] bottom-[-178vh] opacity-20 z-[5]"></div>
+      )}
+    </>
   );
 }
 

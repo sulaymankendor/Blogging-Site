@@ -16,13 +16,13 @@ function MainNavs() {
   return (
     <div className="flex flex-col">
       <div className="flex flex-col">
-        <Link
+        <a
           href="/"
           className="p-2 text-gray-700 ml-5 flex items-center rounded hover:bg-violet-200 hover:underline hover:text-violet-500"
         >
           <HomeLogo />
           <p className="pl-2">Home</p>
-        </Link>
+        </a>
         {navs.map((nav) => {
           return (
             <a
@@ -103,7 +103,7 @@ function MainNavs() {
           <MastodonLogo className="fill-[#474747] hover:fill-indigo-700" />
         </a>
       </div>
-      <div className="w-[225px]">
+      <div className="w-[225px] mx-auto mb-8">
         <p className="text-gray-500 text-sm font-normal mt-6">
           <Link
             href="/"

@@ -1,10 +1,9 @@
 import Head from "next/head";
-import { client } from "@/Contentful/fetch_blogs";
 
+import { client } from "@/Contentful/fetch_blogs";
 import BlogArticles from "@/components/Home/blogs/BlogArticles";
 import MainNavs from "@/components/Home/navs/MainNavs";
 import BlogArticles2 from "@/components/Home/blogs/BlogArticles2";
-import { useState } from "react";
 
 export async function getStaticProps() {
   const response = await client.getEntries({ content_type: "blog" });
@@ -14,15 +13,14 @@ export async function getStaticProps() {
   };
 }
 export default function Home({ data }) {
-  // const [blur, setBlur] = useState(false);
   return (
     <>
       <Head>
         <title>DEV Community</title>
       </Head>
-      <section className="flex justify-around items-start">
-        <section className="w-[238px]">
-          <div className="w-60 bg-white h-60 p-3 border border-gray-200 border-solid rounded-md mb-4">
+      <section className="flex justify-around items-start max-md:flex-col ">
+        <section className="w-[238px] max-md:hidden max-[900px]:hidden ml-2">
+          <div className=" w-60 bg-white h-60 p-3 border border-gray-200 border-solid rounded-md mb-4">
             <h1 className="text-xl font-bold">
               DEV Community is a community of 1,149,768 amazing developers
             </h1>
