@@ -65,7 +65,7 @@ function Post(props: {
     setBlog(blog1);
   }, [route.asPath]);
 
-  let [lockScroll, setLockScroll] = useState("auto");
+  const [lockScroll, setLockScroll] = useState("auto");
   const useBodyScrollLock = () => {
     useLayoutEffect((): any => {
       const originalStyle = window.getComputedStyle(document.body).overflow;
