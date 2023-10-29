@@ -24,13 +24,15 @@ function BlogArticles2({ secondArticles, width }) {
       {blogs.map((article) => {
         return (
           <Link
-            href={`/${article.fields.authorName}/${article.fields.blogTitle}`}
+            href={`/${article.fields.authorName.replaceAll(" ", "-")}/${
+              article.fields.slug
+            }`}
             key={article.sys.id}
             className="hover:text-blue-700 text-gray-500"
             onClick={() => {
               if (
                 `/${article.fields.authorName}/${article.fields.blogTitle}` !==
-                router.asPath.replaceAll("%20", " ")
+                router.asPath.replaceAll("-", " ")
               ) {
                 blogContext[0](true);
                 blogContext[1](true);

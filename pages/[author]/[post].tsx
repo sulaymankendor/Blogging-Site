@@ -20,8 +20,8 @@ export async function getStaticPaths() {
   const paths = devArticles(data, data2).map((article: Blog): Paths => {
     return {
       params: {
-        author: article.fields.authorName,
-        post: article.fields.blogTitle,
+        author: article.fields.authorName.replaceAll(" ", "-"),
+        post: article.fields.slug,
       },
     };
   });
@@ -49,14 +49,14 @@ function Post(props: {
   useEffect(() => {
     const blog1: Blog[] = props.blogs.filter((article): boolean => {
       return (
-        article.fields.authorName === props.data.author &&
-        article.fields.blogTitle === props.data.post
+        article.fields.authorName === props.data.author.replaceAll("-", " ") &&
+        article.fields.slug === props.data.post
       );
     });
     const blog2: Blog[] = props.blogs2.filter((article): boolean => {
       return (
-        article.fields.authorName === props.data.author &&
-        article.fields.blogTitle === props.data.post
+        article.fields.authorName === props.data.author.replaceAll("-", " ") &&
+        article.fields.slug === props.data.post
       );
     });
     if (blog2[0] !== undefined) {

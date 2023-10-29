@@ -7,6 +7,7 @@ export type Blog = {
     authorName: string;
     content: any;
     dateTime: string;
+    slug: string;
   };
 };
 

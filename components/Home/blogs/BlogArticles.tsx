@@ -13,7 +13,7 @@ function BlogArticles({ blogArcticles }) {
   const blogContext = useContext(BlogContext);
   let data = blogArcticles;
   if (router.query.latest === "") {
-    data = blogArcticles.slice(0, 3);
+    data = blogArcticles.slice(0, 4);
   }
   const [autoORHidden, setAutoORHidden] = useState("auto");
 
@@ -33,8 +33,10 @@ function BlogArticles({ blogArcticles }) {
       blogContext[2].map((blog) => {
         if (
           blog.sys.id ===
+          // @ts-ignore
           document.getElementsByClassName("svg")[index].dataset.blogID
         ) {
+          // @ts-ignore
           document.getElementsByClassName("svg")[index].style.fill = "red";
         }
       });
@@ -50,11 +52,13 @@ function BlogArticles({ blogArcticles }) {
             className="w-[54vw] mx-2 max-md:w-[100vw] max-md:mx-auto max-[900px]:w-[61vw] max-[900px]:ml-2 bg-white mt-2 rounded-md border border-gray-200 border-solid pb-9 "
           >
             <Link
-              href={`/${article.fields.authorName}/${article.fields.blogTitle}`}
+              href={`/${article.fields.authorName.replaceAll(" ", "-")}/${
+                article.fields.slug
+              }`}
               onClick={() => {
                 if (
                   `/${article.fields.authorName}/${article.fields.blogTitle}` !==
-                  router.asPath.replaceAll("%20", " ")
+                  router.asPath.replaceAll("-", " ")
                 ) {
                   blogContext[0](true);
                   blogContext[1](true);
@@ -98,12 +102,14 @@ function BlogArticles({ blogArcticles }) {
               </div>
               <div className="ml-12 mt-5">
                 <Link
-                  href={`/${article.fields.authorName}/${article.fields.blogTitle}`}
+                  href={`/${article.fields.authorName.replaceAll(" ", "-")}/${
+                    article.fields.slug
+                  }`}
                   className="text-gray-900 text-2xl font-bold font-sans text-start hover:text-blue-800"
                   onClick={() => {
                     if (
                       `/${article.fields.authorName}/${article.fields.blogTitle}` !==
-                      router.asPath.replaceAll("%20", " ")
+                      router.asPath.replaceAll("-", " ")
                     ) {
                       blogContext[0](true);
                       blogContext[1](true);
@@ -122,6 +128,7 @@ function BlogArticles({ blogArcticles }) {
               <button
                 ref={blogContext[7]}
                 onClick={(e) => {
+                  // @ts-ignore
                   if (e.target.parentElement.style.fill === "") {
                     if (blogContext[2].length === 0) {
                       blogContext[4]([article]);
@@ -138,6 +145,7 @@ function BlogArticles({ blogArcticles }) {
                         }
                       }
                     }
+                    // @ts-ignore
                     e.target.parentElement.style.fill = "red";
                   } else {
                     const removeFromFavourites = blogContext[2].filter(
@@ -146,6 +154,7 @@ function BlogArticles({ blogArcticles }) {
                       }
                     );
                     blogContext[4](removeFromFavourites);
+                    // @ts-ignore
                     e.target.parentElement.style.fill = "";
                     blogContext[6](false);
                   }
