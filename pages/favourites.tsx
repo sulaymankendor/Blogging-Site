@@ -22,6 +22,9 @@ function Favourites(props) {
 
   return (
     <>
+      <Head>
+        <title>Favourite Blogs</title>
+      </Head>
       {loading && (
         <div className="fixed top-[45vh] left-[47vw] z-50">
           <Oval secondaryColor="azure" />
