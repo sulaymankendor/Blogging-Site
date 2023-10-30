@@ -3,6 +3,8 @@ import Avatar from "@mui/material/Avatar";
 import Image from "next/image";
 import Link from "next/link";
 import { Oval } from "react-loader-spinner";
+import Head from "next/head";
+
 
 import { client } from "@/Contentful/fetch_blogs";
 import BlogArticles2 from "@/components/Home/blogs/BlogArticles2";
