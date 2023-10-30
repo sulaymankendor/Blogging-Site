@@ -45,7 +45,6 @@ function Post(props: {
   blogs2: Blog[];
 }) {
   const route = useRouter();
-  // const [blog, setBlog] = useState([]);
   const [blog, setBlog] = useState(null);
 
   useEffect(() => {
@@ -64,7 +63,6 @@ function Post(props: {
     if (blog2[0] !== undefined) {
       blog1.push(blog2[0]);
     }
-    // setBlog(blog1);
     setBlog(blog1[0]);
   }, [route.asPath]);
 
