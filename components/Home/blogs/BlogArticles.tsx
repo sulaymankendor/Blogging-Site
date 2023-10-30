@@ -1,12 +1,12 @@
 import { useContext, useEffect, useLayoutEffect, useState } from "react";
-import { BlogContext } from "@/lib/utilities/context";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import Link from "next/link";
 import { Avatar } from "@mui/material";
 
+import { BlogContext } from "@/lib/utilities/context";
 import { Blog } from "@/Types/types";
 import { date } from "@/lib/utilities/date";
-import { useRouter } from "next/router";
 
 function BlogArticles({ blogArcticles }) {
   const router = useRouter();
