@@ -19,7 +19,10 @@ function Hits({
   searchValues,
   values,
 }) {
-  let [lockScroll, setLockScroll] = useState("auto");
+  const route = useRouter();
+  const [show, setShow] = useState(true);
+  const [lockScroll, setLockScroll] = useState("auto");
+  const [loading, setLoading] = useState(false);
   const validQuery = searchState.query?.length >= 1;
   const showDarkBackDrop = Object.keys(searchState).length;
   const useBodyScrollLock = () => {
@@ -29,8 +32,6 @@ function Hits({
       return () => (document.body.style.overflow = originalStyle);
     }, [lockScroll]);
   };
-
-  const [show, setShow] = useState(true);
 
   useEffect(() => {
     if (validQuery) {
@@ -50,14 +51,11 @@ function Hits({
   } else {
     blur(false);
   }
-  const [loading, setLoading] = useState(false);
   useEffect(() => {
     if (loading) {
       blur2(true);
     }
   }, [loading]);
-  const route = useRouter();
-  // const [countClick, setCountClick] = useState(0);
   useEffect(() => {
     blur(false);
     blur2(false);
@@ -79,21 +77,6 @@ function Hits({
       setLockScroll("auto");
     }
   }, [loading]);
-  // solve letter
-  // useEffect(() => {
-  //   searchResults?.hits.map((hit) => {
-  //     if (url !== route.asPath.replaceAll("%20", " ") && loading === false) {
-  //       setLockScroll("auto");
-  //       console.log(
-  //         `/${hit.authorName}/${hit.title}` ===
-  //           route.asPath.replaceAll("%20", " ")
-  //       );
-  //     } else {
-  //       console.log("yess");
-  //       setLockScroll("auto");
-  //     }
-  //   });
-  // }, [countClick]);
   useBodyScrollLock();
   return (
     <div>

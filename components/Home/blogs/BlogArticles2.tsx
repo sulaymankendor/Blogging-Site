@@ -5,10 +5,10 @@ import { Blog } from "@/Types/types";
 import { BlogContext } from "@/lib/utilities/context";
 
 function BlogArticles2({ secondArticles, width }) {
+  const router = useRouter();
   const blogs: Blog[] = secondArticles;
   const blogContext = useContext(BlogContext);
   const [autoORHidden, setAutoORHidden] = useState("auto");
-  const router = useRouter();
   const useBodyScrollLock = () => {
     useLayoutEffect((): any => {
       const originalStyle = window.getComputedStyle(document.body).overflow;

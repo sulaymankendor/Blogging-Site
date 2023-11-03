@@ -46,6 +46,7 @@ function Post(props: {
 }) {
   const route = useRouter();
   const [blog, setBlog] = useState(null);
+  const [lockScroll, setLockScroll] = useState("auto");
 
   useEffect(() => {
     const blog1: Blog[] = props.blogs.filter((article): boolean => {
@@ -66,7 +67,6 @@ function Post(props: {
     setBlog(blog1[0]);
   }, [route.asPath]);
 
-  const [lockScroll, setLockScroll] = useState("auto");
   const useBodyScrollLock = () => {
     useLayoutEffect((): any => {
       const originalStyle = window.getComputedStyle(document.body).overflow;
@@ -77,7 +77,6 @@ function Post(props: {
   useEffect(() => {
     setLockScroll("auto");
   }, []);
-  console.log(blog);
   useBodyScrollLock();
 
   return (

@@ -11,11 +11,11 @@ import { date } from "@/lib/utilities/date";
 function BlogArticles({ blogArcticles }) {
   const router = useRouter();
   const blogContext = useContext(BlogContext);
+  const [autoORHidden, setAutoORHidden] = useState("auto");
   let data = blogArcticles;
   if (router.query.latest === "") {
     data = blogArcticles.slice(0, 4);
   }
-  const [autoORHidden, setAutoORHidden] = useState("auto");
 
   const useBodyScrollLock = () => {
     useLayoutEffect((): any => {
