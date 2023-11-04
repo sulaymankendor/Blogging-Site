@@ -43,6 +43,7 @@ function BlogArticles({ blogArcticles }) {
     }
   }, [router.asPath]);
   useBodyScrollLock();
+  console.log(data[0]);
   return (
     <section>
       {data.map((article: Blog) => {
@@ -67,7 +68,7 @@ function BlogArticles({ blogArcticles }) {
               }}
             >
               <Image
-                src={"https://" + article.fields.Image.fields.file.url}
+                src={"https:" + article.fields.Image.fields.file.url}
                 alt={article.fields.blogTitle}
                 width={10000}
                 height={0}
