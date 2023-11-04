@@ -53,7 +53,7 @@ function Favourites(props) {
                       }}
                     >
                       <Image
-                        src={"https://" + article.fields.Image.fields.file.url}
+                        src={"https:" + article.fields.Image.fields.file.url}
                         alt={article.fields.Image.fields.file.fileName}
                         width={1000}
                         height={0}
