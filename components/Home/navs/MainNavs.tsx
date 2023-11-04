@@ -26,6 +26,7 @@ function MainNavs() {
         {navs.map((nav) => {
           return (
             <a
+              key={nav.navName}
               href={nav.url}
               className="p-2 text-base mt-2 text-gray-700 ml-5 rounded flex items-center hover:text-violet-500 hover:bg-violet-200 hover:underline"
             >

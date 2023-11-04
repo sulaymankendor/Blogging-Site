@@ -122,9 +122,10 @@ function Post(props: {
               </p>
             </div>
           ) : (
-            <div className="fixed top-[45vh] left-[35vw] z-50">
-              <Oval secondaryColor="azure" />
-            </div>
+            // <div className="fixed top-[45vh] left-[35vw] z-50">
+            //   <Oval secondaryColor="azure" />
+            // </div>
+            <p>Loading...</p>
           )}
         </div>
         <BlogArticles2 secondArticles={props.blogs2} width="w-96" />
