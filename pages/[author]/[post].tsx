@@ -92,7 +92,7 @@ function Post(props: {
               className="bg-white max-md:w-[100vw] w-[60vw] mt-2 rounded-md border border-gray-200 border-solid mb-3 max-md:ml-0 ml-1"
             >
               <Image
-                src={"https://" + blog.fields.Image.fields.file.url}
+                src={"https:" + blog.fields.Image.fields.file.url}
                 alt={blog.fields.Image.fields.file.fileName}
                 width={1000}
                 height={0}
