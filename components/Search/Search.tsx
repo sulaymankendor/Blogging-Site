@@ -7,7 +7,7 @@ function Search({ refine, searchValues, values }) {
         id="algolia_search"
         type="search"
         placeholder="Search..."
-        className="border-2 outline-none px-2 py-1 w-96 rounded-md max-sm:w-[57vw]"
+        className="border-2 outline-none px-2 py-1 w-96 rounded-md max-sm:w-[57vw] max-md:mr-2"
         onChange={(e) => {
           refine(e.currentTarget.value);
           searchValues(e.target.value);

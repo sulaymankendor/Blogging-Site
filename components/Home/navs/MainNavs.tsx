@@ -60,7 +60,7 @@ function MainNavs() {
           <p className="pl-2">Terms of Use</p>
         </a>
       </div>
-      <div className="flex justify-between mt-6 w-52 max-md:ml-2">
+      <div className="flex justify-between mt-6 w-52 max-md:ml-4">
         <a
           href="https://twitter.com/thepracticaldev"
           className="hover:bg-blue-100 p-2 rounded"
@@ -142,7 +142,7 @@ function MainNavs() {
           </a>{" "}
           and other inclusive communities.
         </p>
-        <p className="text-gray-500 text-sm font-normal mt-6 max-md:mb-2">
+        <p className="text-gray-500 text-sm font-normal mt-6 max-md:mb-4">
           Made with love and{" "}
           <a
             href="https://dev.to/t/rails"
