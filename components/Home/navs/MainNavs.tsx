@@ -142,7 +142,7 @@ function MainNavs() {
           </a>{" "}
           and other inclusive communities.
         </p>
-        <p className="text-gray-500 text-sm font-normal mt-6 max-sm:mb-5">
+        <p className="text-gray-500 text-sm font-normal mt-6 max-sm:mb-[200px]">
           Made with love and{" "}
           <a
             href="https://dev.to/t/rails"
