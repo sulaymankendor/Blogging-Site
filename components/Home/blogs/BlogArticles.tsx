@@ -130,8 +130,6 @@ function BlogArticles({ blogArcticles }) {
                 className="active:bg-transparent"
                 onClick={(e) => {
                   // @ts-ignore
-                  // @ts-ignore
-
                   if (e.target.parentElement.style.fill === "") {
                     if (blogContext[2].length === 0) {
                       blogContext[4]([article]);
