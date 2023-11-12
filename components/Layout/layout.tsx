@@ -89,6 +89,39 @@ function Layout({ children }) {
     setLoading(false);
     setAutoORHidden("auto");
   }, [route.asPath]);
+  const ref = useRef(null);
+  useEffect(() => {
+    console.log("width", ref.current ? ref.current.offsetWidth : 0);
+  }, []);
+
+  const [dimensions, setDimensions] = useState({ width: 0 });
+
+  useEffect(() => {
+    const getDimensions = () => ({
+      width: ref.current.offsetWidth,
+    });
+
+    const handleResize = () => {
+      setDimensions(getDimensions());
+    };
+
+    if (ref.current) {
+      setDimensions(getDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [ref]);
+  useEffect(() => {
+    if (dimensions.width > 900) {
+      setAutoORHidden("auto");
+    } else {
+      setAutoORHidden("hidden");
+    }
+  }, [dimensions.width]);
 
   return (
     <>
@@ -191,7 +224,7 @@ function Layout({ children }) {
           addedToFavourites,
         ]}
       >
-        <main className={` ${blur && "blur"} ${blur2 && "blur"}`}>
+        <main className={` ${blur && "blur"} ${blur2 && "blur"}`} ref={ref}>
           {children}
         </main>
       </BlogContext.Provider>
@@ -205,12 +238,12 @@ function Layout({ children }) {
             setShowMenuModal(false);
             setShowDark(false);
           }}
-          className="bg-black fixed top-[56px] right-[-35vw] left-[-21vw] bottom-[-178vh] opacity-20 z-[5]"
+          className="bg-black fixed top-[56px] right-[-35vw] left-[-21vw] bottom-[-178vh] opacity-20 z-[5] min-[901px]:hidden"
         ></div>
       )}
       {showMenuModal && (
         <section className="z-40 w-[300px] max-[900px]:inline ml-2 hidden fixed top-0 left-[-8px] bg-white h-[100vh] overflow-y-scroll">
-          <div className="flex items-center justify-between border-b-gray-200 p-5">
+          <div className="flex items-center justify-between border-b-gray-200 p-5 fixed w-[300px] bg-white">
             <p className="font-bold text-lg">DEV Community</p>
             <button
               onClick={() => {
@@ -223,7 +256,7 @@ function Layout({ children }) {
               <CancelNavMenuModal />
             </button>
           </div>
-          <div className=" w-60 mt-2  mx-auto bg-white h-60 p-3 border border-gray-200 border-solid rounded-md mb-4">
+          <div className="mt-20 w-60 mx-auto bg-white h-60 p-3 border border-gray-200 border-solid rounded-md mb-4">
             <h1 className="text-xl font-bold">
               DEV Community is a community of 1,149,768 amazing developers
             </h1>
