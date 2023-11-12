@@ -127,7 +127,7 @@ function BlogArticles({ blogArcticles }) {
               </p>
               <button
                 ref={blogContext[7]}
-                className="active:text-red-900"
+                className="active:bg-transparent"
                 onClick={(e) => {
                   // @ts-ignore
                   // @ts-ignore
