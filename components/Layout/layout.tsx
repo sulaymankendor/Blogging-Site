@@ -90,9 +90,6 @@ function Layout({ children }) {
     setAutoORHidden("auto");
   }, [route.asPath]);
   const ref = useRef(null);
-  useEffect(() => {
-    console.log("width", ref.current ? ref.current.offsetWidth : 0);
-  }, []);
 
   const [dimensions, setDimensions] = useState({ width: 0 });
 

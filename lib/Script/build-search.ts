@@ -22,6 +22,7 @@ function transformPostsToSearchObjects(posts) {
       authorName: post.fields.authorName,
       authorImage: post.fields.authorImage.fields.file.url,
       content: richText.documentToReactComponents(post.fields.content),
+      slug: post.fields.slug,
     };
   });
 

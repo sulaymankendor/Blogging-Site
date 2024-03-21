@@ -1,4 +1,4 @@
-import { useContext, useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
@@ -125,7 +125,7 @@ function Hits({
               {searchResults.hits.map((hit) => (
                 <Link
                   key={hit.objectID}
-                  href={`/${hit.authorName}/${hit.title}`}
+                  href={`/${hit.authorName.replaceAll(" ", "-")}/${hit.slug}`}
                   className="hover:bg-white py-4 px-6 border-b"
                   onClick={() => {
                     setShow(false);
@@ -134,7 +134,7 @@ function Hits({
                     setLockScroll("auto");
                     if (
                       `/${hit.authorName}/${hit.title}` !==
-                      route.asPath.replaceAll("%20", " ")
+                      route.asPath.replaceAll("-", " ")
                     ) {
                       setLoading(true);
                     }
